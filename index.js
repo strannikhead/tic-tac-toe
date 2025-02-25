@@ -7,6 +7,7 @@ playersDictionary[ZERO] = 'Zero';
 
 let crossCount = 0;
 let zeroCount = 0;
+let isOver = false;
 
 const container = document.getElementById('fieldWrapper');
 
@@ -39,7 +40,7 @@ function renderGrid(dimension) {
 function cellClickHandler(row, col) {
     console.log(`Clicked on cell: ${row}, ${col}`);
 
-    if (field[row][col] === EMPTY) {
+    if (field[row][col] === EMPTY && !isOver) {
         if (crossCount <= zeroCount) {
             renderSymbolInCell(CROSS, row, col);
             field[row][col] = CROSS;
@@ -109,6 +110,7 @@ function tryFindWinner() {
         const [[x1, y1], [x2, y2], [x3, y3]] = combination;
         const cell = field[x1][y1];
         if (cell !== EMPTY && cell === field[x2][y2] && cell === field[x3][y3]) {
+            isOver = true;
             return [cell, combination];
         }
     }
