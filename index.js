@@ -1,7 +1,9 @@
 const CROSS = 'X';
 const ZERO = 'O';
 const EMPTY = ' ';
-let nextMove = CROSS;
+
+let crossCount = 0;
+let zeroCount = 0;
 
 const container = document.getElementById('fieldWrapper');
 let field = [[EMPTY, EMPTY, EMPTY],
@@ -30,13 +32,19 @@ function renderGrid(dimension) {
 }
 
 function cellClickHandler(row, col) {
-    // Пиши код тут
     console.log(`Clicked on cell: ${row}, ${col}`);
 
     if (findCell(row, col) === EMPTY) {
-        let move = nextMove === CROSS ? ZERO : CROSS;
-        nextMove = move;
-        renderSymbolInCell(move, row, col);
+        if (crossCount <= zeroCount) {
+            renderSymbolInCell(CROSS, row, col);
+            crossCount++;
+        } else {
+            renderSymbolInCell(ZERO, row, col);
+            zeroCount++;
+        }
+        if (crossCount + zeroCount === 9) {
+            alert('Победила дружба');
+        }
     }
 
     /* Пользоваться методом для размещения символа в клетке так:
