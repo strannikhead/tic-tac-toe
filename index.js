@@ -34,7 +34,7 @@ function renderGrid(dimension) {
 function cellClickHandler(row, col) {
     console.log(`Clicked on cell: ${row}, ${col}`);
 
-    if (findCell(row, col) === EMPTY) {
+    if (field[row][col] === EMPTY) {
         if (crossCount <= zeroCount) {
             renderSymbolInCell(CROSS, row, col);
             crossCount++;
