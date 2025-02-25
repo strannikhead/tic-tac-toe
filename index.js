@@ -6,9 +6,11 @@ let crossCount = 0;
 let zeroCount = 0;
 
 const container = document.getElementById('fieldWrapper');
+
 let field = [[EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY]]
+
 startGame();
 addResetListener();
 
@@ -72,6 +74,32 @@ function addResetListener() {
 function resetClickHandler() {
     console.log('reset!');
 }
+
+function tryFindWinner() {
+    const winCombinations = [
+        // Ряды
+        [[0, 0], [0, 1], [0, 2]],
+        [[1, 0], [1, 1], [1, 2]],
+        [[2, 0], [2, 1], [2, 2]],
+        // Столбцы
+        [[0, 0], [1, 0], [2, 0]],
+        [[0, 1], [1, 1], [2, 1]],
+        [[0, 2], [1, 2], [2, 2]],
+        // Диагонали
+        [[0, 0], [1, 1], [2, 2]],
+        [[0, 2], [1, 1], [2, 0]]
+    ];
+
+    for (let combination of winCombinations) {
+        const [[x1, y1], [x2, y2], [x3, y3]] = combination;
+        const cell = board[x1][y1];
+        if (cell !== EMPTY && cell === board[x2][y2] && cell === board[x3][y3]) {
+            return [cell, combination];
+        }
+    }
+    return false;
+}
+
 
 
 /* Test Function */
