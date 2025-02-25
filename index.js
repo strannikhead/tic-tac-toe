@@ -61,6 +61,7 @@ function cellClickHandler(row, col) {
                 let coordinates = winner[1][i];
                 renderSymbolInCell(winner[0], coordinates[0], coordinates[1], '#FF0000');
             }
+            
             alert(`Winner is ${playersDictionary[winner[0]]}`);
         }
     }
@@ -88,7 +89,13 @@ function addResetListener() {
 }
 
 function resetClickHandler() {
-    console.log('reset!');
+    isOver = false;
+    crossCount = 0;
+    zeroCount = 0;
+    field = [[EMPTY, EMPTY, EMPTY],
+        [EMPTY, EMPTY, EMPTY],
+        [EMPTY, EMPTY, EMPTY]]
+    renderGrid(3);
 }
 
 function tryFindWinner() {
@@ -116,7 +123,6 @@ function tryFindWinner() {
     }
     return false;
 }
-
 
 
 /* Test Function */
