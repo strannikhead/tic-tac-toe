@@ -42,9 +42,11 @@ function cellClickHandler(row, col) {
     if (field[row][col] === EMPTY) {
         if (crossCount <= zeroCount) {
             renderSymbolInCell(CROSS, row, col);
+            field[row][col] = CROSS;
             crossCount++;
         } else {
             renderSymbolInCell(ZERO, row, col);
+            field[row][col] = ZERO;
             zeroCount++;
         }
         if (crossCount + zeroCount === 9) {
@@ -52,12 +54,13 @@ function cellClickHandler(row, col) {
             return;
         }
         let winner = tryFindWinner();
+        console.log(winner);
         if (winner) {
-            alert(`Winner is ${playersDictionary[winner[0]]}`);
             for (let i = 0; i < winner[1].length; i++) {
                 let coordinates = winner[1][i];
                 renderSymbolInCell(winner[0], coordinates[0], coordinates[1], '#FF0000');
             }
+            alert(`Winner is ${playersDictionary[winner[0]]}`);
         }
     }
 
