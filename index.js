@@ -104,8 +104,8 @@ function tryFindWinner() {
 
     for (let combination of winCombinations) {
         const [[x1, y1], [x2, y2], [x3, y3]] = combination;
-        const cell = board[x1][y1];
-        if (cell !== EMPTY && cell === board[x2][y2] && cell === board[x3][y3]) {
+        const cell = field[x1][y1];
+        if (cell !== EMPTY && cell === field[x2][y2] && cell === field[x3][y3]) {
             return [cell, combination];
         }
     }
