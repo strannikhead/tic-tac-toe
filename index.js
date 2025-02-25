@@ -1,6 +1,9 @@
 const CROSS = 'X';
 const ZERO = 'O';
 const EMPTY = ' ';
+const playersDictionary = {};
+playersDictionary[CROSS] = 'Cross';
+playersDictionary[ZERO] = 'Zero';
 
 let crossCount = 0;
 let zeroCount = 0;
@@ -44,6 +47,15 @@ function cellClickHandler(row, col) {
         }
         if (crossCount + zeroCount === 9) {
             alert('Победила дружба');
+            return;
+        }
+        let winner = tryFindWinner();
+        if (winner) {
+            alert(`Winner is ${playersDictionary[winner[0]]}`);
+            for (let i = 0; i < winner[1].length; i++) {
+                let coordinates = winner[1][i];
+                renderSymbolInCell(winner[0], coordinates[0], coordinates[1], '#FF0000');
+            }
         }
     }
 
@@ -71,6 +83,10 @@ function addResetListener() {
 
 function resetClickHandler() {
     console.log('reset!');
+}
+
+function tryFindWinner() {
+
 }
 
 
